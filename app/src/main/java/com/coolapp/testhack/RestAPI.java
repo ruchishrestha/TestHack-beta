@@ -161,12 +161,12 @@ public class RestAPI {
         return result;
     }
 
-    public JSONObject GetLatLong() throws Exception {
+    public JSONObject GetLocDesc() throws Exception {
         JSONObject result = null;
         JSONObject o = new JSONObject();
         JSONObject p = new JSONObject();
         o.put("interface","RestAPI");
-        o.put("method", "GetLatLong");
+        o.put("method", "GetLocDesc");
         o.put("parameters", p);
         String s = o.toString();
         String r = load(s);

@@ -49,10 +49,10 @@ public class MainActivity extends ActionBarActivity {
                 GravityCompat.START);
 
         // Add Drawer Item to dataList
-        dataList.add(new DrawerItem("Location Track", R.mipmap.ic_action_email));
-        dataList.add(new DrawerItem("Relief Areas Entry", R.mipmap.ic_action_good));
-        dataList.add(new DrawerItem("Rental Info", R.mipmap.ic_action_gamepad));
-        dataList.add(new DrawerItem("Medical & Supply Info", R.mipmap.ic_action_labels));
+        dataList.add(new DrawerItem("Location Track", R.mipmap.ic_location_track));
+        dataList.add(new DrawerItem("Relief Areas Entry", R.mipmap.relief_ar));
+        dataList.add(new DrawerItem("Rental Info", R.mipmap.rent));
+        dataList.add(new DrawerItem("Medical & Supply Info", R.mipmap.med_sup));
 
 
         adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
@@ -64,6 +64,7 @@ public class MainActivity extends ActionBarActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open,
                 R.string.drawer_close) {
