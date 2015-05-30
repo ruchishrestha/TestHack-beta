@@ -95,7 +95,7 @@ public class FragmentFour extends Fragment {
                 Desc =desc.getText().toString();
 
 
-                MedSupDescTable MedSupDesc = new MedSupDescTable(title, add1,add2,Contact,Desc,lat, log);
+                MedSupDescTable MedSupDesc = new MedSupDescTable(title, add1,add2,Contact,Desc,lat,log);
                 new AsyncMedSupEntry().execute(MedSupDesc);
             }
         });

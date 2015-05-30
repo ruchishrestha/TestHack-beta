@@ -47,7 +47,8 @@ public class FragmentTwo extends Fragment {
     Fragment mapfgment;
     double lt;
     double lg;
-    int bolclick; String loc_det1,loc_name1,relief1;
+    int bolclick;
+    String loc_det1,loc_name1,relief1;
     List<Address> geocodeMatches = null;
     String Address1;
     String Address2;
@@ -73,6 +74,7 @@ public class FragmentTwo extends Fragment {
         unsafe=(RadioButton)view.findViewById(R.id.unsafe);
         relief=(CheckBox) view.findViewById(R.id.relief);
         bolclick=0;
+        relief1="None";
 
 
         //loc_det.setEnabled(false);
@@ -148,7 +150,7 @@ public class FragmentTwo extends Fragment {
             public void onClick(View v) {
                 loc_det1 = loc_det.getText().toString();
                 loc_name1 =""+Address1+" "+Address2+" "+State;
-                LocDescTable LocDesc = new LocDescTable(loc_name1, lt, lg, loc_det1, bolclick, "Relief");
+                LocDescTable LocDesc = new LocDescTable(loc_name1, lt, lg, loc_det1, bolclick, relief1);
                 new AsyncLocationEntry().execute(LocDesc);
             }
         });
