@@ -3,6 +3,7 @@ package com.coolapp.testhack;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.wifi.WifiManager;
 import android.os.IBinder;
 
 /**
@@ -28,7 +29,8 @@ public class BGService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         UploadReceiver receiver = new UploadReceiver();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
         registerReceiver(receiver, filter);
         return START_STICKY;
     }
