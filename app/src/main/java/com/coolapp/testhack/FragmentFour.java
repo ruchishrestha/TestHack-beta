@@ -11,11 +11,9 @@ import android.widget.TextView;
 /**
  * Created by Home-PC on 5/21/2015.
  */
-public class FragmentThree extends Fragment {
+public class FragmentFour extends Fragment {
 
-
-
-    public FragmentThree() {
+    public FragmentFour() {
 
     }
 
@@ -23,7 +21,7 @@ public class FragmentThree extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.setloc, container,
+        View view = inflater.inflate(R.layout.medical, container,
                 false);
 
 

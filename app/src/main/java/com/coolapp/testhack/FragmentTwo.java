@@ -94,7 +94,7 @@ public class FragmentTwo extends Fragment {
                 else{
                     relief1="Null";
                     safe.setEnabled(true);
-                    safe.setEnabled(true);
+                    unsafe.setEnabled(true);
                 }
 
             }
