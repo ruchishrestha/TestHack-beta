@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -36,10 +38,11 @@ public class FragmentTwo extends Fragment {
     RadioButton safe, unsafe;
     Button save_btn;
     Button set_loc;
+    CheckBox relief;
     Fragment mapfgment;
     double lt;
     double lg;
-    int bolclick; String loc_det1,loc_name1;
+    int bolclick; String loc_det1,loc_name1,relief1;
 
     public FragmentTwo()
     {
@@ -50,7 +53,7 @@ public class FragmentTwo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.fragment_layout_two,container, false);
+        View view=inflater.inflate(R.layout.locentry,container, false);
 
         loc_det=(EditText) view.findViewById(R.id.loc_det);
         status=(RadioGroup) view.findViewById(R.id.status);
@@ -58,6 +61,7 @@ public class FragmentTwo extends Fragment {
         set_loc=(Button)view.findViewById(R.id.set_loc);
         safe=(RadioButton)view.findViewById(R.id.safe);
         unsafe=(RadioButton)view.findViewById(R.id.unsafe);
+        relief=(CheckBox) view.findViewById(R.id.relief);
 
 
         //loc_det.setEnabled(false);
@@ -77,6 +81,24 @@ public class FragmentTwo extends Fragment {
         });
         lt=getArguments().getDouble("lat");
         lg=getArguments().getDouble("long");
+        relief.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    relief1="Relief";
+                    safe.setChecked(true);
+                    bolclick=1;
+                    safe.setEnabled(false);
+                    unsafe.setEnabled(false);
+                }
+                else{
+                    relief1="Null";
+                    safe.setEnabled(true);
+                    safe.setEnabled(true);
+                }
+
+            }
+        });
         Toast.makeText(getActivity(),"Lat: "+lt+" Long: "+lg,Toast.LENGTH_LONG).show();
         safe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +141,7 @@ public class FragmentTwo extends Fragment {
 
                 api.CreateNewEntry1(params[0].getLoc_name(),
                         params[0].getLat(), params[0].getLog(),
-                        params[0].getLoc_det(),params[0].getbol());
+                        params[0].getLoc_det(),params[0].getbol(),params[0].getrelief());
 
             } catch (Exception e) {
                 Log.d("AsyncLocationEntry", e.getMessage());
