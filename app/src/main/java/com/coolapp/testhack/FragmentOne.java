@@ -251,7 +251,7 @@ public class FragmentOne extends Fragment {
             for (int i = 0; i < result.size(); i++) {
                 //data.add(result.get(i).getLat() + " " + result.get(i).getLog());
                 //addmarkers(result.get(i).getLoc_name(),result.get(i).getLat(), result.get(i).getLog(),result.get(i).getLoc_det(),result.get(i).getbol(),result.get(i).getrelief());
-                mMyMarkersArray.add(new LocDescTable(result.get(i).getLoc_name(),result.get(i).getLat(), result.get(i).getLog(),result.get(i).getLoc_det(),result.get(i).getbol(),result.get(i).getrelief()));
+              mMyMarkersArray.add(new LocDescTable(result.get(i).getLoc_name(),result.get(i).getLat(), result.get(i).getLog(),result.get(i).getLoc_det(),result.get(i).getbol(),result.get(i).getrelief()));
             }
             plotMarkers(mMyMarkersArray);
         }
@@ -266,7 +266,12 @@ public class FragmentOne extends Fragment {
 
                 // Create user marker with custom icon and other options
                 MarkerOptions markerOption = new MarkerOptions().position(new LatLng(myMarker.getLat(), myMarker.getLog()));
-                markerOption.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                Toast.makeText(getActivity(),""+myMarker.getbol(),Toast.LENGTH_LONG).show();
+                if(myMarker.getrelief().equals("Relief")){
+                markerOption.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));}
+                else{
+                    markerOption.icon(BitmapDescriptorFactory.fromResource(R.mipmap.toys_store));
+                }
 
                 Marker currentMarker = googleMap.addMarker(markerOption);
                 mMarkersHashMap.put(currentMarker, myMarker);
@@ -292,7 +297,7 @@ public class FragmentOne extends Fragment {
         public View getInfoContents(Marker marker)
         {
 
-            View v  = inf.inflate(R.layout.infowindow_layout, null);
+            View v  = View.inflate(getActivity(),R.layout.infowindow_layout,null);
 
             LocDescTable myMarker = mMarkersHashMap.get(marker);
 
