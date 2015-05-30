@@ -101,6 +101,8 @@ public class MainActivity extends ActionBarActivity {
             case 0:
 
                 fragment = new FragmentOne();
+                args.putBoolean("bull",false);
+                fragment.setArguments(args);
 
                 try {
                     MapsInitializer.initialize(this);
@@ -110,6 +112,10 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case 1:
                 fragment = new FragmentTwo();
+
+                args.putDouble("lat",0);
+                args.putDouble("long",0);
+                fragment.setArguments(args);
 
                 break;
             case 2:
@@ -136,6 +142,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
         {
+
         frgManager = getFragmentManager();
         frgManager.beginTransaction().replace(R.id.content_frame, fragment)
                 .commit();

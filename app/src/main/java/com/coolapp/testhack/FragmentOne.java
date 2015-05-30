@@ -2,13 +2,21 @@ package com.coolapp.testhack;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
@@ -19,6 +27,9 @@ public class FragmentOne extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
+    Double lat;
+    Double log;
+    LatLng loc;
 
     public FragmentOne(){
 
@@ -30,6 +41,7 @@ public class FragmentOne extends Fragment {
         // inflat and return the layout
         View v = inflater.inflate(R.layout.fragment_layout_one, container,
                 false);
+        setHasOptionsMenu(true);
         mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
 
@@ -42,29 +54,53 @@ public class FragmentOne extends Fragment {
         }
 
         googleMap = mMapView.getMap();
+
         // latitude and longitude
-        double latitude = 27.7;
-        double longitude = 85.3333;
 
-        // create marker
-        MarkerOptions marker = new MarkerOptions().position(
-                new LatLng(latitude, longitude)).title("Hello Maps");
 
-        // Changing marker icon
-        marker.icon(BitmapDescriptorFactory
-                .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+        //My Location
+        googleMap.setMyLocationEnabled(true);
+        GoogleMap.OnMyLocationChangeListener myLocationChangeListener=new GoogleMap.OnMyLocationChangeListener(){
+            @Override
+            public void onMyLocationChange(Location location) {
+                loc = new LatLng(location.getLatitude(),location.getLongitude());
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,16.0f));
+                MarkerOptions marker = new MarkerOptions().position(
+                        new LatLng(loc.latitude,
+                                loc.longitude)).title("You Are Here!!");
+                // Changing marker icon
+                marker.icon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
-        // adding marker
-        googleMap.addMarker(marker);
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(27.7, 85.3333)).zoom(12).build();
-        googleMap.animateCamera(CameraUpdateFactory
-                .newCameraPosition(cameraPosition));
+                // adding marker
+                googleMap.addMarker(marker);
+            }
+        };
+        boolean bull=getArguments().getBoolean("bull");
+        if(bull) {
+            googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    lat = latLng.latitude;
+                    log = latLng.longitude;
+                    nxtfragment();
+                }
+            }); }       // create marker
+
 
         // Perform any camera updates here
         return v;
     }
 
+    public void nxtfragment(){
+        Bundle args=new Bundle();
+        Fragment f=new FragmentTwo();
+        args.putBoolean("bull",true);
+        args.putDouble("lat",lat );
+        args.putDouble("long",log);
+        f.setArguments(args);
+        this.getFragmentManager().beginTransaction().replace(R.id.content_frame,f).commit();
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -88,4 +124,38 @@ public class FragmentOne extends Fragment {
         super.onLowMemory();
         mMapView.onLowMemory();
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do something that differs the Activity's menu here
+        inflater.inflate(R.menu.fragment_menu_item, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.zin:
+                googleMap.animateCamera(CameraUpdateFactory.zoomIn());
+                return true;
+            case R.id.zout:
+                googleMap.animateCamera(CameraUpdateFactory.zoomOut());
+                return true;
+            case R.id.nview:
+                googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                return true;
+            case R.id.satview:
+                googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                return true;
+            case R.id.hyview:
+                googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                return true;
+            default:
+                break;
+        }
+
+        return false;
+    }
+
+
 }
