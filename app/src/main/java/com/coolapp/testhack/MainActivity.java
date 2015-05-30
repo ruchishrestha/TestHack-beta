@@ -49,9 +49,8 @@ public class MainActivity extends ActionBarActivity {
         // Add Drawer Item to dataList
         dataList.add(new DrawerItem("Location Track", R.mipmap.ic_action_email));
         dataList.add(new DrawerItem("Relief Areas Entry", R.mipmap.ic_action_good));
-        dataList.add(new DrawerItem("rental Info", R.mipmap.ic_action_gamepad));
+        dataList.add(new DrawerItem("Rental Info", R.mipmap.ic_action_gamepad));
         dataList.add(new DrawerItem("Medical & Supply Info", R.mipmap.ic_action_labels));
-        dataList.add(new DrawerItem("News Update", R.mipmap.ic_action_search));
 
 
         adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
@@ -123,20 +122,10 @@ public class MainActivity extends ActionBarActivity {
 
                 break;
             case 3:
-                fragment = new FragmentTwo();
+                fragment = new FragmentFour();
 
                 break;
-            case 4:
-                fragment = new FragmentTwo();
-                                break;
-            case 5:
-                fragment = new FragmentThree();
 
-                break;
-            case 6:
-                fragment = new FragmentThree();
-
-                break;
             default:
                 break;
         }

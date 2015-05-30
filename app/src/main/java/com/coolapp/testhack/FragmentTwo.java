@@ -99,7 +99,7 @@ public class FragmentTwo extends Fragment {
 
             }
         });
-        Toast.makeText(getActivity(),"Lat: "+lt+" Long: "+lg,Toast.LENGTH_LONG).show();
+
         safe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
