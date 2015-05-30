@@ -1,5 +1,5 @@
 /* JSON API for android appliation */
-package com.coolapp.testhack;
+package com.coolapp.testhack
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 public class RestAPI {
-    private final String urlString = "http://appwebapi.somee.com/Handler1.ashx";
+    private final String urlString = "http://VJ4500/Handler1.ashx";
 
     private static String convertStreamToUTF8String(InputStream stream) throws IOException {
 	    String result = "";

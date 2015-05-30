@@ -22,6 +22,8 @@ public class RentDescTable {
     public RentDescTable() {
         super();
         this.ownname1 = null;
+        this.ownadd1=null;
+        this.ownadd2=null;
         this.lat= 0;
         this.log = 0;
         this.phone1 = 0;
