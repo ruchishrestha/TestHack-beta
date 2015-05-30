@@ -41,6 +41,8 @@ public class FragmentOne extends Fragment {
     Double lat;
     Double log;
     LatLng loc;
+    Marker PointHere;
+    MarkerOptions marker;
     int bull;
     Fragment f;
 
@@ -73,12 +75,12 @@ public class FragmentOne extends Fragment {
 
         //My Location
         googleMap.setMyLocationEnabled(true);
-        /*GoogleMap.OnMyLocationChangeListener myLocationChangeListener=new GoogleMap.OnMyLocationChangeListener(){
+        final GoogleMap.OnMyLocationChangeListener myLocationChangeListener=new GoogleMap.OnMyLocationChangeListener(){
             @Override
             public void onMyLocationChange(Location location) {
                 loc = new LatLng(location.getLatitude(),location.getLongitude());
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,16.0f));
-                MarkerOptions marker = new MarkerOptions().position(
+                marker = new MarkerOptions().position(
                         new LatLng(loc.latitude,
                                 loc.longitude)).title("You Are Here!!");
                 // Changing marker icon
@@ -86,9 +88,11 @@ public class FragmentOne extends Fragment {
                         .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
                 // adding marker
-                googleMap.addMarker(marker);
+                PointHere = googleMap.addMarker(marker);
+                googleMap.setOnMyLocationChangeListener(null);
             }
-        };*/
+        };
+        googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
 
         //Added
         data = new ArrayList<String>();
