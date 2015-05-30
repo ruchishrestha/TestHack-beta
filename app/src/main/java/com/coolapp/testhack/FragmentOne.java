@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,6 +28,7 @@ import com.google.android.gms.maps.model.*;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Home-PC on 5/21/2015.
@@ -35,6 +38,8 @@ public class FragmentOne extends Fragment {
 //Added
 
     ArrayList<String> data;
+    private ArrayList<LocDescTable> mMyMarkersArray = new ArrayList<LocDescTable>();
+    private HashMap<Marker, LocDescTable> mMarkersHashMap;
 
     MapView mMapView;
     private GoogleMap googleMap;
@@ -46,6 +51,7 @@ public class FragmentOne extends Fragment {
     int bull;
     Fragment f;
     Boolean first = true;
+    LayoutInflater inf;
 
     public FragmentOne(){
 
@@ -60,6 +66,7 @@ public class FragmentOne extends Fragment {
         setHasOptionsMenu(true);
         mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
+        mMarkersHashMap = new HashMap<Marker, LocDescTable>();
         first = true;
         mMapView.onResume();// needed to get the map to display immediately
 
@@ -243,8 +250,62 @@ public class FragmentOne extends Fragment {
 
             for (int i = 0; i < result.size(); i++) {
                 //data.add(result.get(i).getLat() + " " + result.get(i).getLog());
-                addmarkers(result.get(i).getLoc_name(),result.get(i).getLat(), result.get(i).getLog(),result.get(i).getLoc_det(),result.get(i).getbol(),result.get(i).getrelief());
+                //addmarkers(result.get(i).getLoc_name(),result.get(i).getLat(), result.get(i).getLog(),result.get(i).getLoc_det(),result.get(i).getbol(),result.get(i).getrelief());
+                mMyMarkersArray.add(new LocDescTable(result.get(i).getLoc_name(),result.get(i).getLat(), result.get(i).getLog(),result.get(i).getLoc_det(),result.get(i).getbol(),result.get(i).getrelief()));
             }
+            plotMarkers(mMyMarkersArray);
+        }
+    }
+
+    private void plotMarkers(ArrayList<LocDescTable> markers)
+    {
+        if(markers.size() > 0)
+        {
+            for (LocDescTable myMarker : markers)
+            {
+
+                // Create user marker with custom icon and other options
+                MarkerOptions markerOption = new MarkerOptions().position(new LatLng(myMarker.getLat(), myMarker.getLog()));
+                markerOption.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+                Marker currentMarker = googleMap.addMarker(markerOption);
+                mMarkersHashMap.put(currentMarker, myMarker);
+
+                googleMap.setInfoWindowAdapter(new MarkerInfoWindowAdapter());
+            }
+        }
+    }
+
+    public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter
+    {
+        public MarkerInfoWindowAdapter()
+        {
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker)
+        {
+            return null;
+        }
+
+        @Override
+        public View getInfoContents(Marker marker)
+        {
+
+            View v  = inf.inflate(R.layout.infowindow_layout, null);
+
+            LocDescTable myMarker = mMarkersHashMap.get(marker);
+
+
+            TextView locname = (TextView)v.findViewById(R.id.loc_name);
+
+            TextView locdet = (TextView)v.findViewById(R.id.loc_detail);
+
+            locname.setText(myMarker.getLoc_name());
+
+            locdet.setText(myMarker.getLoc_det());
+
+            return v;
         }
     }
 }
