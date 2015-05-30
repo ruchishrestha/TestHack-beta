@@ -152,7 +152,6 @@ public class FragmentTwo extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-            Toast.makeText(getActivity(),loc_det1,Toast.LENGTH_LONG).show();
             Toast.makeText(getActivity(),"Successful",Toast.LENGTH_LONG).show();
         }
 
