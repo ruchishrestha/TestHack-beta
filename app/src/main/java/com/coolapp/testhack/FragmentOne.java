@@ -302,11 +302,11 @@ public class FragmentOne extends Fragment {
             LocDescTable myMarker = mMarkersHashMap.get(marker);
 
 
-            TextView locname = (TextView)v.findViewById(R.id.loc_name);
+            TextView locnam = (TextView)v.findViewById(R.id.loc_name);
 
             TextView locdet = (TextView)v.findViewById(R.id.loc_detail);
 
-            locname.setText(myMarker.getLoc_name());
+            locnam.setText(myMarker.getLoc_name());
 
             locdet.setText(myMarker.getLoc_det());
 
