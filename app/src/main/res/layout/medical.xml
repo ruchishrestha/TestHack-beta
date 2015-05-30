@@ -6,7 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Set Location"
-        android:id="@+id/SetlocBTN"
+        android:id="@+id/set_loc"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp" />
@@ -14,8 +14,8 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText9"
-        android:layout_below="@+id/SetlocBTN"
+        android:id="@+id/name"
+        android:layout_below="@+id/set_loc"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="41dp"
@@ -26,8 +26,8 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText10"
-        android:layout_below="@+id/editText9"
+        android:id="@+id/add"
+        android:layout_below="@+id/name"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -38,8 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="phone"
-        android:id="@+id/editText11"
-        android:layout_below="@+id/editText10"
+        android:id="@+id/cntnum"
+        android:layout_below="@+id/add"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -52,9 +52,9 @@
         android:gravity="top|left"
         android:lines="5"
         android:ems="10"
-        android:id="@+id/editText8"
+        android:id="@+id/medsup_desc"
         android:hint="Description"
-        android:layout_below="@+id/editText11"
+        android:layout_below="@+id/cntnum"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -62,7 +62,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
-        android:id="@+id/button2"
-        android:layout_below="@+id/editText8"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/save"
+        android:layout_below="@+id/medsup_desc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp" />
 </RelativeLayout>

@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Set Location"
-        android:id="@+id/SetlocBTN"
+        android:id="@+id/set_loc"
         android:layout_marginTop="43dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -15,9 +15,9 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/ownname"
         android:hint="Owner Name"
-        android:layout_below="@+id/SetlocBTN"
+        android:layout_below="@+id/set_loc"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -26,57 +26,59 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
+        android:id="@+id/ownadd"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:hint="Address"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/ownname"
         android:layout_alignParentLeft="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText4"
+        android:id="@+id/ownphn"
         android:hint="Phone Number"
         android:inputType="phone"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ownadd"
+        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/editText5"
-        android:layout_alignParentLeft="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText5"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:inputType="phone"
-        android:hint="Mobile Number"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editText3" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:gravity="top|left"
-        android:lines="2"
-        android:ems="10"
-        android:id="@+id/editText8"
-        android:hint="Description"
-        android:layout_below="@+id/editText7"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText7"
-        android:hint="Rent Price"
-        android:layout_below="@+id/editText4"
+        android:id="@+id/ownmob"
+        android:inputType="phone"
+        android:hint="Mobile Number"
+        android:layout_below="@+id/ownphn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="46dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:lines="3"
+        android:ems="10"
+        android:id="@+id/rent_desc"
+        android:hint="Description"
+        android:layout_below="@+id/ownmob"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rentprc"
+        android:hint="Rent Price"
+        android:layout_below="@+id/rent_desc"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -84,9 +86,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
-        android:onClick="saves"
-        android:id="@+id/SaveBTN"
-        android:layout_below="@+id/editText8"
+        android:id="@+id/save"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/rentprc"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

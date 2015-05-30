@@ -100,9 +100,7 @@ public class MainActivity extends ActionBarActivity {
             case 0:
 
                 fragment = new FragmentOne();
-                args.putBoolean("bull",false);
-                fragment.setArguments(args);
-
+                args.putInt("bull",0);
                 try {
                     MapsInitializer.initialize(this);
                 } catch (Exception e) {
@@ -111,19 +109,18 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case 1:
                 fragment = new FragmentTwo();
-
                 args.putDouble("lat",0);
                 args.putDouble("long",0);
-                fragment.setArguments(args);
-
                 break;
             case 2:
                 fragment = new FragmentThree();
-
+                args.putDouble("lat",0);
+                args.putDouble("long",0);
                 break;
             case 3:
                 fragment = new FragmentFour();
-
+                args.putDouble("lat",0);
+                args.putDouble("long",0);
                 break;
 
             default:
@@ -131,10 +128,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         {
-
-        frgManager = getFragmentManager();
-        frgManager.beginTransaction().replace(R.id.content_frame, fragment)
-                .commit();
+            fragment.setArguments(args);
+            frgManager = getFragmentManager();
+            frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+                    .commit();
         }
 
         mDrawerList.setItemChecked(possition, true);

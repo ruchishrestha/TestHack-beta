@@ -8,13 +8,14 @@ public class LocDescTable {
     int bol;
     double lat,log;
 
-    public LocDescTable(String loc_name, double lat, double log, String loc_det, int bol) {
+    public LocDescTable(String loc_name, double lat, double log, String loc_det, int bol,String relief) {
         super();
         this.loc_name = loc_name;
         this.lat = lat;
         this.log = log;
         this.loc_det = loc_det;
         this.bol=bol;
+        this.relief=relief;
     }
     public LocDescTable() {
         super();
@@ -23,6 +24,7 @@ public class LocDescTable {
         this.log = 0;
         this.loc_det = null;
         this.bol=0;
+        this.relief=null;
 
     }
 

@@ -30,6 +30,8 @@ public class FragmentOne extends Fragment {
     Double lat;
     Double log;
     LatLng loc;
+    int bull;
+    Fragment f;
 
     public FragmentOne(){
 
@@ -76,8 +78,8 @@ public class FragmentOne extends Fragment {
                 googleMap.addMarker(marker);
             }
         };
-        boolean bull=getArguments().getBoolean("bull");
-        if(bull) {
+        bull=getArguments().getInt("bull");
+        if(!(bull==0)) {
             googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
                 public void onMapClick(LatLng latLng) {
@@ -94,8 +96,13 @@ public class FragmentOne extends Fragment {
 
     public void nxtfragment(){
         Bundle args=new Bundle();
-        Fragment f=new FragmentTwo();
-        args.putBoolean("bull",true);
+        switch (bull){
+            case 1:f=new FragmentTwo();break;
+            case 2:f=new FragmentThree();break;
+            case 3:f=new FragmentFour();break;
+            default: break;
+        }
+        //args.putBoolean("bull",true);
         args.putDouble("lat",lat );
         args.putDouble("long",log);
         f.setArguments(args);
