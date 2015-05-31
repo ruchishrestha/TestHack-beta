@@ -93,7 +93,6 @@ public class FragmentOne extends Fragment {
             }
         };
         googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
-
         //Added
         data = new ArrayList<String>();
         bull=getArguments().getInt("bull");
