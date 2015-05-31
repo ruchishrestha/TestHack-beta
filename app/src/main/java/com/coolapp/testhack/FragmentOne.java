@@ -45,6 +45,7 @@ public class FragmentOne extends Fragment {
     MarkerOptions marker;
     int bull;
     Fragment f;
+    Boolean first = true;
 
     public FragmentOne(){
 
@@ -59,7 +60,7 @@ public class FragmentOne extends Fragment {
         setHasOptionsMenu(true);
         mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
-
+        first = true;
         mMapView.onResume();// needed to get the map to display immediately
 
         try {
@@ -79,7 +80,7 @@ public class FragmentOne extends Fragment {
             @Override
             public void onMyLocationChange(Location location) {
                 loc = new LatLng(location.getLatitude(),location.getLongitude());
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,16.0f));
+                if(first) googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,16.0f));
                 marker = new MarkerOptions().position(
                         new LatLng(loc.latitude,
                                 loc.longitude)).title("You Are Here!!");
@@ -88,8 +89,12 @@ public class FragmentOne extends Fragment {
                         .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
                 // adding marker
+                try{
+                    PointHere.remove();
+                }
+                catch(Exception e){}
                 PointHere = googleMap.addMarker(marker);
-                googleMap.setOnMyLocationChangeListener(null);
+                first = false;
             }
         };
         googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
