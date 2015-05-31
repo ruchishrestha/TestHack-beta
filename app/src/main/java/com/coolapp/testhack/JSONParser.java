@@ -29,7 +29,7 @@ public class JSONParser {
             for(int i=0;i<jsonArray.length();i++)
             {
                 jsonObj=jsonArray.getJSONObject(i);
-                arrayList.add(new LocDescTable(jsonObj.getDouble("Latitude"), jsonObj.getDouble("Longitude")));
+                arrayList.add(new LocDescTable(jsonObj.getString("LocName"),jsonObj.getDouble("Latitude"), jsonObj.getDouble("Longitude"),jsonObj.getString("LocDetail"),jsonObj.getInt("Status"),jsonObj.getString("Type")));
             }
 
         } catch (JSONException e) {

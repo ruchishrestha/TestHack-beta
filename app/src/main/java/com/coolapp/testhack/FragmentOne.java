@@ -180,13 +180,26 @@ public class FragmentOne extends Fragment {
         return false;
     }
 
-    public void addmarkers(double lat1,double log2){
+    public void addmarkers(String loc_name,double lat1,double log2,String loc_desc,int bol,String relief){
         MarkerOptions marker = new MarkerOptions().position(
                 new LatLng(lat1,
                         log2));
-        // Changing marker icon
-        marker.icon(BitmapDescriptorFactory
-                .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                if(relief.equals("Relief")){
+                    // Changing marker icon
+                    marker.icon(BitmapDescriptorFactory
+                            .fromResource(R.mipmap.health_medical));
+                }else{
+                    if(bol==1) {// Changing marker icon
+                        marker.icon(BitmapDescriptorFactory
+                                .defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    }
+                    else{
+                        // Changing marker icon
+                        marker.icon(BitmapDescriptorFactory
+                                .fromResource(R.mipmap.toys_store));
+
+                    }
+                }
 
         // adding marker
         googleMap.addMarker(marker);
@@ -203,7 +216,7 @@ public class FragmentOne extends Fragment {
             RestAPI api = new RestAPI();
             try {
 
-                JSONObject jsonObj = api.GetLatLong();
+                JSONObject jsonObj = api.GetLocDesc();
 
                 JSONParser parser = new JSONParser();
 
@@ -219,11 +232,10 @@ public class FragmentOne extends Fragment {
 
         @Override
         protected void onPostExecute(ArrayList<LocDescTable> result) {
-            Toast.makeText(getActivity(),"jhbfhbhgr",Toast.LENGTH_SHORT).show();
+
             for (int i = 0; i < result.size(); i++) {
                 //data.add(result.get(i).getLat() + " " + result.get(i).getLog());
-                Toast.makeText(getActivity(),"Lat:"+result.get(i).getLat(),Toast.LENGTH_SHORT).show();
-                addmarkers(result.get(i).getLat(), result.get(i).getLog());
+                addmarkers(result.get(i).getLoc_name(),result.get(i).getLat(), result.get(i).getLog(),result.get(i).getLoc_det(),result.get(i).getbol(),result.get(i).getrelief());
             }
         }
     }
