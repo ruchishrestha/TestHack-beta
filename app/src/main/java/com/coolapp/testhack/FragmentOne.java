@@ -3,35 +3,44 @@ package com.coolapp.testhack;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+
 import android.content.Context;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
 
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Home-PC on 5/21/2015.
  */
 public class FragmentOne extends Fragment {
 
+//Added
+
+    ArrayList<String> data;
+
     MapView mMapView;
     private GoogleMap googleMap;
     Double lat;
     Double log;
     LatLng loc;
-    Marker PointHere;
-    MarkerOptions marker;
     int bull;
     Fragment f;
 
@@ -64,12 +73,12 @@ public class FragmentOne extends Fragment {
 
         //My Location
         googleMap.setMyLocationEnabled(true);
-        GoogleMap.OnMyLocationChangeListener myLocationChangeListener=new GoogleMap.OnMyLocationChangeListener(){
+        /*GoogleMap.OnMyLocationChangeListener myLocationChangeListener=new GoogleMap.OnMyLocationChangeListener(){
             @Override
             public void onMyLocationChange(Location location) {
                 loc = new LatLng(location.getLatitude(),location.getLongitude());
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,16.0f));
-                marker = new MarkerOptions().position(
+                MarkerOptions marker = new MarkerOptions().position(
                         new LatLng(loc.latitude,
                                 loc.longitude)).title("You Are Here!!");
                 // Changing marker icon
@@ -77,11 +86,12 @@ public class FragmentOne extends Fragment {
                         .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
                 // adding marker
-                PointHere = googleMap.addMarker(marker);
-                googleMap.setOnMyLocationChangeListener(null);
+                googleMap.addMarker(marker);
             }
-        };
-        googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
+        };*/
+
+        //Added
+        data = new ArrayList<String>();
         bull=getArguments().getInt("bull");
         if(!(bull==0)) {
             googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -93,10 +103,12 @@ public class FragmentOne extends Fragment {
                 }
             }); }       // create marker
 
-
+        new AsyncLoadLocDescDetails().execute();
         // Perform any camera updates here
         return v;
     }
+
+
 
     public void nxtfragment(){
         Bundle args=new Bundle();
@@ -168,5 +180,51 @@ public class FragmentOne extends Fragment {
         return false;
     }
 
+    public void addmarkers(double lat1,double log2){
+        MarkerOptions marker = new MarkerOptions().position(
+                new LatLng(lat1,
+                        log2));
+        // Changing marker icon
+        marker.icon(BitmapDescriptorFactory
+                .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
+        // adding marker
+        googleMap.addMarker(marker);
+    }
+
+
+    protected class AsyncLoadLocDescDetails extends
+            AsyncTask<Void, JSONObject, ArrayList<LocDescTable>> {
+        ArrayList<LocDescTable> deptTable = null;
+
+        @Override
+        protected ArrayList<LocDescTable> doInBackground(Void... params) {
+
+            RestAPI api = new RestAPI();
+            try {
+
+                JSONObject jsonObj = api.GetLatLong();
+
+                JSONParser parser = new JSONParser();
+
+                deptTable = parser.parseLocDesc(jsonObj);
+
+            } catch (Exception e) {
+                Log.d("AsyncLoadDeptDetails", e.getMessage());
+
+            }
+
+            return deptTable;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<LocDescTable> result) {
+            Toast.makeText(getActivity(),"jhbfhbhgr",Toast.LENGTH_SHORT).show();
+            for (int i = 0; i < result.size(); i++) {
+                //data.add(result.get(i).getLat() + " " + result.get(i).getLog());
+                Toast.makeText(getActivity(),"Lat:"+result.get(i).getLat(),Toast.LENGTH_SHORT).show();
+                addmarkers(result.get(i).getLat(), result.get(i).getLog());
+            }
+        }
+    }
 }
