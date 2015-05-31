@@ -111,18 +111,18 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case 1:
                 fragment = new FragmentTwo();
-                args.putDouble("lat",0);
-                args.putDouble("long",0);
+                args.putDouble("lat",1);
+                args.putDouble("long",1);
                 break;
             case 2:
                 fragment = new FragmentThree();
-                args.putDouble("lat",0);
-                args.putDouble("long",0);
+                args.putDouble("lat",1);
+                args.putDouble("long",1);
                 break;
             case 3:
                 fragment = new FragmentFour();
-                args.putDouble("lat",0);
-                args.putDouble("long",0);
+                args.putDouble("lat",1);
+                args.putDouble("long",1);
                 break;
 
             default:

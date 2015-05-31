@@ -110,7 +110,7 @@ public class FragmentTwo extends Fragment {
             Zipcode = geocodeMatches.get(0).getPostalCode();
             Country = geocodeMatches.get(0).getCountryName();
         }
-        Toast.makeText(getActivity(),""+State,Toast.LENGTH_LONG).show();
+
 
         relief.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

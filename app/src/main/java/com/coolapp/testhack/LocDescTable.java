@@ -17,6 +17,12 @@ public class LocDescTable {
         this.bol=bol;
         this.relief=relief;
     }
+
+    public  LocDescTable(double lat, double log){
+        this.lat=lat;
+        this.log=log;
+    }
+
     public LocDescTable() {
         super();
         this.loc_name = null;
